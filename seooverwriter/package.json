@@ -1,0 +1,27 @@
+{
+  "name": "seooverwriter",
+  "version": "1.0.0",
+  "description": "Seo Overiter - High-Velocity Technical SEO Auditor & AI Overview Telemetry Platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "keywords": [
+    "seo",
+    "auditor",
+    "crawler",
+    "core-web-vitals",
+    "ai-overview",
+    "aeo"
+  ],
+  "author": "Seo Overiter Team",
+  "license": "MIT"
+}

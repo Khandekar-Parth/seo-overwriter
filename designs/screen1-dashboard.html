@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seo Overiter - Telemetry Audit Dashboard</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#11131a",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-highest": "#33343c",
+            "on-tertiary": "#003824",
+            "tertiary-container": "#00885d",
+            "surface-container-lowest": "#0c0e15",
+            "surface-tint": "#c0c1ff",
+            "on-primary-container": "#0d0096",
+            "on-surface-variant": "#c7c4d7",
+            "on-primary-fixed": "#07006c",
+            "secondary-fixed-dim": "#bdc2ff",
+            "on-background": "#e2e2ec",
+            "primary": "#c0c1ff",
+            "on-error-container": "#ffdad6",
+            "outline-variant": "#464554",
+            "on-secondary": "#131e8c",
+            "surface-bright": "#373941",
+            "primary-container": "#8083ff",
+            "surface-variant": "#33343c",
+            "secondary-fixed": "#e0e0ff",
+            "on-error": "#690005",
+            "inverse-on-surface": "#2e3038",
+            "background": "#11131a",
+            "error": "#ffb4ab",
+            "on-secondary-fixed-variant": "#2f3aa3",
+            "surface-container": "#1d1f27",
+            "on-primary": "#1000a9",
+            "inverse-surface": "#e2e2ec",
+            "primary-fixed": "#e1e0ff",
+            "surface-dim": "#11131a",
+            "tertiary": "#4edea3",
+            "secondary": "#bdc2ff",
+            "inverse-primary": "#494bd6",
+            "outline": "#908fa0",
+            "error-container": "#93000a",
+            "tertiary-fixed": "#6ffbbe",
+            "on-tertiary-fixed-variant": "#005236",
+            "on-secondary-fixed": "#000767",
+            "tertiary-fixed-dim": "#4edea3",
+            "primary-fixed-dim": "#c0c1ff",
+            "surface-container-low": "#191b23",
+            "on-surface": "#e2e2ec",
+            "secondary-container": "#2f3aa3",
+            "on-tertiary-container": "#000703",
+            "on-secondary-container": "#a8afff",
+            "on-primary-fixed-variant": "#2f2ebe",
+            "surface-container-high": "#282a31"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem",
+            "gutter-dense": "0.5rem",
+            "margin-mobile": "0.75rem",
+            "gutter": "1rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-code-md": ["JetBrains Mono"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-code-lg": ["JetBrains Mono"],
+            "label-code-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "display-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "label-code-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0", "fontWeight": "500" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-code-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "label-code-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Subtle pulse animation for telemetry indicator */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .animate-pulse-slow {
+      animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Ambient cyber-glassmorphic gradient highlights */
+    .cyber-card {
+      background: radial-gradient(120% 120% at 50% -10%, rgba(99, 102, 241, 0.08) 0%, rgba(14, 16, 23, 0.95) 70%);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen selection:bg-primary selection:text-on-primary font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (Shared Component Execution) -->
+<header class="flex justify-between items-center w-full px-margin h-14 border-b border-outline-variant/30 bg-surface-container-lowest/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+<!-- Brand & Left Cluster -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high border border-outline-variant/40 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(99,102,241,0.3)]">
+<span class="material-symbols-outlined" data-icon="radar" data-weight="fill" style="font-variation-settings: 'FILL' 1;">radar</span>
+</div>
+<span class="text-headline-sm font-headline-sm font-bold tracking-tight text-primary dark:text-primary">Seo Overiter</span>
+</div>
+<!-- Telemetry Live Status -->
+<div class="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/30 text-label-code-sm font-label-code-sm text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse-slow"></span>
+<span>Live Telemetry</span>
+</div>
+<!-- Navigation Tabs (Telemetry is active) -->
+<nav class="hidden xl:flex items-center gap-space-md ml-space-md">
+<a class="text-primary border-b-2 border-primary font-medium pb-1 text-label-code-md font-label-code-md transition-all duration-150" href="#">Telemetry</a>
+<a class="text-on-surface-variant hover:text-on-surface font-medium text-label-code-md font-label-code-md transition-all duration-150" href="#">Crawl Matrix</a>
+<a class="text-on-surface-variant hover:text-on-surface font-medium text-label-code-md font-label-code-md transition-all duration-150" href="#">Indexation</a>
+<a class="text-on-surface-variant hover:text-on-surface font-medium text-label-code-md font-label-code-md transition-all duration-150" href="#">Core Web Vitals</a>
+<a class="text-on-surface-variant hover:text-on-surface font-medium text-label-code-md font-label-code-md transition-all duration-150" href="#">Security</a>
+</nav>
+</div>
+<!-- Center/Right Domain & Action Cluster -->
+<div class="flex items-center gap-space-md">
+<!-- Target Domain Inspector Bar -->
+<div class="hidden md:flex items-center bg-surface-container-low border border-outline-variant/40 rounded-lg px-2.5 py-1 gap-2 shadow-inner focus-within:border-primary focus-within:shadow-[0_0_10px_rgba(99,102,241,0.25)] transition-all">
+<span class="material-symbols-outlined text-tertiary text-[15px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+<input class="bg-transparent border-0 p-0 text-label-code-md font-label-code-md text-on-surface focus:ring-0 w-44 tracking-tight select-all" readonly="" type="text" value="https://example.com"/>
+<span class="w-[1px] h-3.5 bg-outline-variant/40"></span>
+<span class="text-label-code-sm font-label-code-sm text-outline hidden lg:inline">Last audited 4 mins ago • 1,420 pages indexed</span>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-space-xs sm:gap-space-sm">
+<!-- Re-Scan Button -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-headline-sm text-label-code-md font-semibold hover:opacity-95 shadow-[0_0_12px_rgba(99,102,241,0.35)] transition-all duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[16px] animate-spin" data-icon="sync" style="animation-duration: 6s;">sync</span>
+<span>Re-Scan</span>
+</button>
+<!-- Export PDF Button -->
+<button class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:bg-surface-bright transition-colors duration-150 active:scale-95 text-label-code-md font-label-code-md">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Export PDF</span>
+</button>
+<!-- Trailing Icon Actions -->
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-150 relative">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+</button>
+<!-- User Profile Avatar -->
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border border-outline-variant/60 flex items-center justify-center text-primary font-label-code-sm font-bold ml-1" title="Analyst operator profile avatar">
+          OP
+        </div>
+</div>
+</div>
+</header>
+<!-- Main Observability Workspace Container -->
+<main class="max-w-[1560px] mx-auto p-margin space-y-margin">
+<!-- Sub-Header Status Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center gap-space-md">
+<h1 class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface flex items-center gap-2">
+          Diagnostic Audit Telemetry
+          <span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/40 text-label-code-sm font-label-code-sm text-secondary font-normal">v4.8.2 Deep Crawl</span>
+</h1>
+</div>
+<div class="flex items-center gap-space-md text-label-code-sm font-label-code-sm text-outline">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary inline-block"></span> 42 Passed</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary inline-block"></span> 14 Warnings</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error inline-block"></span> 6 Critical Issues</span>
+</div>
+</div>
+<!-- MAIN HERO CARD: SEO Health Score & Multi-Dimension Breakdown -->
+<section class="cyber-card rounded-xl border border-outline-variant/40 p-space-lg lg:p-space-xl shadow-2xl relative overflow-hidden backdrop-blur-xl">
+<!-- Glow ambient header accent hairline -->
+<div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-container via-secondary-fixed-dim/40 to-transparent"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Left Column: Circular Radial SVG Gauge & Summary -->
+<div class="lg:col-span-5 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-space-lg lg:border-r lg:border-outline-variant/20 pr-0 lg:pr-space-xl">
+<!-- Radial Progress SVG -->
+<div class="relative w-44 h-44 flex items-center justify-center shrink-0">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 160 160">
+<!-- Background ring -->
+<circle class="text-surface-container-highest" cx="80" cy="80" fill="transparent" r="68" stroke="currentColor" stroke-width="10"></circle>
+<!-- Active progress ring (78% = 0.78 * 2 * PI * 68 ≈ 333 / 427) -->
+<circle class="transition-all duration-1000 ease-out" cx="80" cy="80" fill="transparent" r="68" stroke="url(#hero-gauge-gradient)" stroke-dasharray="427.25" stroke-dashoffset="94" stroke-linecap="round" stroke-width="11"></circle>
+<defs>
+<lineargradient id="hero-gauge-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#8083ff"></stop>
+<stop offset="70%" stop-color="#c0c1ff"></stop>
+<stop offset="100%" stop-color="#4edea3"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Inner Radial Readout -->
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="text-display-lg font-display-lg font-bold tracking-tight text-on-surface leading-none">78</span>
+<span class="text-label-code-sm font-label-code-sm text-outline tracking-wider uppercase mt-1">/ 100 Score</span>
+</div>
+</div>
+<!-- Gauge Meta Details -->
+<div class="flex flex-col text-center sm:text-left space-y-space-xs">
+<div class="inline-flex items-center justify-center sm:justify-start gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary border border-outline-variant/30 text-label-code-sm font-label-code-sm font-semibold">
+                Grade B
+              </span>
+<span class="text-headline-sm font-headline-sm font-semibold text-on-surface">Needs Attention</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant max-w-xs">
+              Overall health is constrained by heavy media assets impact on Core Web Vitals and pagination canonicalization anomalies.
+            </p>
+<div class="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+<span class="px-2 py-1 rounded bg-surface-container-low border border-outline-variant/30 text-label-code-sm font-label-code-sm text-tertiary">
+                ✓ 42 Passed
+              </span>
+<span class="px-2 py-1 rounded bg-surface-container-low border border-outline-variant/30 text-label-code-sm font-label-code-sm text-secondary">
+                ⚠ 14 Warnings
+              </span>
+<span class="px-2 py-1 rounded bg-surface-container-low border border-outline-variant/30 text-label-code-sm font-label-code-sm text-error">
+                ✕ 6 Errors
+              </span>
+</div>
+</div>
+</div>
+<!-- Right Column: 5-Dimension Horizontal Breakdown -->
+<div class="lg:col-span-7 space-y-space-md">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant/20">
+<span class="text-label-code-md font-label-code-md text-on-surface font-semibold uppercase tracking-wider">Health Vector Diagnostics</span>
+<span class="text-label-code-sm font-label-code-sm text-outline">Target threshold: ≥ 85%</span>
+</div>
+<!-- Dimension 1: Technical Crawl -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-medium">1. Technical Crawl</span>
+<span class="text-label-code-sm font-label-code-sm text-tertiary bg-tertiary-container/20 px-1.5 py-0.5 rounded border border-tertiary/20">+3.2% vs last week</span>
+</div>
+<span class="text-label-code-md font-label-code-md text-tertiary font-bold">82%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-tertiary h-2 rounded-full transition-all duration-700 shadow-[0_0_8px_rgba(78,222,163,0.4)]" style="width: 82%"></div>
+</div>
+</div>
+<!-- Dimension 2: Core Web Vitals -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-medium">2. Core Web Vitals</span>
+<span class="text-label-code-sm font-label-code-sm text-secondary bg-secondary-container/20 px-1.5 py-0.5 rounded border border-secondary/30">LCP 3.4s - Needs Optimization</span>
+</div>
+<span class="text-label-code-md font-label-code-md text-secondary font-bold">64%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-secondary-container h-2 rounded-full transition-all duration-700 shadow-[0_0_8px_rgba(189,194,255,0.4)]" style="width: 64%"></div>
+</div>
+</div>
+<!-- Dimension 3: On-Page Semantic -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-medium">3. On-Page Semantic</span>
+<span class="text-label-code-sm font-label-code-sm text-tertiary bg-tertiary-container/20 px-1.5 py-0.5 rounded border border-tertiary/20">98% meta title coverage</span>
+</div>
+<span class="text-label-code-md font-label-code-md text-tertiary font-bold">92%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-tertiary h-2 rounded-full transition-all duration-700 shadow-[0_0_8px_rgba(78,222,163,0.4)]" style="width: 92%"></div>
+</div>
+</div>
+<!-- Dimension 4: Content Quality -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-medium">4. Content Quality</span>
+<span class="text-label-code-sm font-label-code-sm text-secondary bg-secondary-container/20 px-1.5 py-0.5 rounded border border-secondary/30">Thin content detected</span>
+</div>
+<span class="text-label-code-md font-label-code-md text-secondary font-bold">71%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-secondary-container h-2 rounded-full transition-all duration-700 shadow-[0_0_8px_rgba(189,194,255,0.4)]" style="width: 71%"></div>
+</div>
+</div>
+<!-- Dimension 5: Security -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-medium">5. Security</span>
+<span class="text-label-code-sm font-label-code-sm text-tertiary bg-tertiary-container/20 px-1.5 py-0.5 rounded border border-tertiary/20">HTTPS valid, HSTS active</span>
+</div>
+<span class="text-label-code-md font-label-code-md text-tertiary font-bold">95%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-tertiary h-2 rounded-full transition-all duration-700 shadow-[0_0_8px_rgba(78,222,163,0.4)]" style="width: 95%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PRIORITIZED 4-QUADRANT ACTION MATRIX: IMPACT VS EFFORT -->
+<section class="space-y-space-md">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Prioritized Remediation Matrix</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Surgically balanced by organic visibility upside and engineering resource cost.</p>
+</div>
+<div class="flex items-center gap-space-sm text-label-code-sm font-label-code-sm">
+<span class="flex items-center gap-1.5 text-tertiary"><span class="w-2 h-2 rounded-full bg-tertiary"></span> High Impact</span>
+<span class="flex items-center gap-1.5 text-outline"><span class="w-2 h-2 rounded-full bg-outline"></span> Low Effort</span>
+</div>
+</div>
+<!-- 2x2 Matrix Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-gutter">
+<!-- Quadrant 1: Quick Wins (High Impact, Low Effort) -->
+<div class="bg-surface-container-low border-2 border-tertiary/40 rounded-xl p-space-md relative overflow-hidden shadow-[0_0_24px_-8px_rgba(78,222,163,0.25)] flex flex-col justify-between">
+<div class="absolute top-0 right-0 bg-tertiary text-on-tertiary font-label-code-sm text-[11px] font-bold px-3 py-0.5 rounded-bl-lg tracking-wide uppercase">
+            Quick Wins
+          </div>
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="bolt">bolt</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Quadrant 1: High Impact • Low Effort</h3>
+<span class="text-label-code-sm font-label-code-sm text-tertiary font-semibold">Fastest path to +8.5 aggregate score</span>
+</div>
+</div>
+<!-- Task List -->
+<div class="space-y-2 mt-3">
+<!-- Item 1 -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-lg p-2.5 flex items-start justify-between gap-3 hover:border-tertiary/60 transition-colors">
+<div class="space-y-0.5">
+<div class="text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Fix Canonical Loop on /products/tag/*
+                  </div>
+<p class="text-label-code-sm font-label-code-sm text-outline">Self-referencing canonical redirect creating crawl trap (84 URLs affected)</p>
+</div>
+<div class="flex flex-col items-end shrink-0 gap-1">
+<span class="text-label-code-sm font-label-code-sm text-tertiary font-bold bg-tertiary-container/20 px-1.5 py-0.5 rounded">+4.5 Score</span>
+<button class="text-label-code-sm font-label-code-sm text-primary hover:underline font-semibold flex items-center gap-0.5">
+                    1-Click Fix <span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-lg p-2.5 flex items-start justify-between gap-3 hover:border-tertiary/60 transition-colors">
+<div class="space-y-0.5">
+<div class="text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Missing Title Tags on 18 Pagination URLs
+                  </div>
+<p class="text-label-code-sm font-label-code-sm text-outline">Inject automated pattern template: Page {N} of Archive</p>
+</div>
+<div class="flex flex-col items-end shrink-0 gap-1">
+<span class="text-label-code-sm font-label-code-sm text-tertiary font-bold bg-tertiary-container/20 px-1.5 py-0.5 rounded">+2.8 Score</span>
+<span class="text-label-code-sm font-label-code-sm text-outline">~10 min task</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-lg p-2.5 flex items-start justify-between gap-3 hover:border-tertiary/60 transition-colors">
+<div class="space-y-0.5">
+<div class="text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Resolve 301 redirect chain on primary logo asset
+                  </div>
+<p class="text-label-code-sm font-label-code-sm text-outline">Direct link bypasses 2 hops, saving 180ms TTFB across all pages</p>
+</div>
+<div class="flex flex-col items-end shrink-0 gap-1">
+<span class="text-label-code-sm font-label-code-sm text-tertiary font-bold bg-tertiary-container/20 px-1.5 py-0.5 rounded">+1.2 Score</span>
+<span class="text-label-code-sm font-label-code-sm text-outline">Single config</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant/20 flex items-center justify-between text-label-code-sm font-label-code-sm">
+<span class="text-on-surface-variant">Estimated sprint velocity: 1.5 dev hours</span>
+<span class="text-tertiary font-semibold">Priority: Immediate P0</span>
+</div>
+</div>
+<!-- Quadrant 2: Major Projects (High Impact, High Effort) -->
+<div class="bg-surface-container-low border border-primary/40 rounded-xl p-space-md relative overflow-hidden shadow-[0_0_20px_-6px_rgba(99,102,241,0.2)] flex flex-col justify-between">
+<div class="absolute top-0 right-0 bg-primary-container text-on-primary font-label-code-sm text-[11px] font-bold px-3 py-0.5 rounded-bl-lg tracking-wide uppercase">
+            Major Projects
+          </div>
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary" data-icon="account_tree">account_tree</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Quadrant 2: High Impact • High Effort</h3>
+<span class="text-label-code-sm font-label-code-sm text-secondary font-semibold">Architectural overhauls with high leverage</span>
+</div>
+</div>
+<!-- Task List -->
+<div class="space-y-2 mt-3">
+<!-- Item 1 -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-lg p-2.5 flex items-start justify-between gap-3 hover:border-primary/60 transition-colors">
+<div class="space-y-0.5">
+<div class="text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    Compress hero media for LCP (Largest Contentful Paint)
+                  </div>
+<p class="text-label-code-sm font-label-code-sm text-outline">Converts 12 large PNG/JPG hero banners to modern AVIF/WebP responsive sets</p>
+</div>
+<div class="flex flex-col items-end shrink-0 gap-1">
+<span class="text-label-code-sm font-label-code-sm text-primary font-bold bg-secondary-container/30 px-1.5 py-0.5 rounded">-1.4s LCP</span>
+<span class="text-label-code-sm font-label-code-sm text-outline">Assets pipeline</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-lg p-2.5 flex items-start justify-between gap-3 hover:border-primary/60 transition-colors">
+<div class="space-y-0.5">
+<div class="text-body-sm font-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Implement Dynamic SSR for Client-side faceted navigation
+                  </div>
+<p class="text-label-code-sm font-label-code-sm text-outline">Allows search bots to discover and index 450 orphaned deep catalog category pages</p>
+</div>
+<div class="flex flex-col items-end shrink-0 gap-1">
+<span class="text-label-code-sm font-label-code-sm text-primary font-bold bg-secondary-container/30 px-1.5 py-0.5 rounded">+450 Pages</span>
+<span class="text-label-code-sm font-label-code-sm text-outline">Full sprint</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant/20 flex items-center justify-between text-label-code-sm font-label-code-sm">
+<span class="text-on-surface-variant">Requires Frontend + DevOps alignment</span>
+<span class="text-secondary font-semibold">Priority: Planned P1</span>
+</div>
+</div>
+<!-- Quadrant 3: Fill-ins (Low Impact, Low Effort) -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-md relative overflow-hidden flex flex-col justify-between">
+<div class="absolute top-0 right-0 bg-surface-container-highest text-outline font-label-code-sm text-[11px] font-medium px-3 py-0.5 rounded-bl-lg tracking-wide uppercase">
+            Fill-ins
+          </div>
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-outline" data-icon="checklist">checklist</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Quadrant 3: Low Impact • Low Effort</h3>
+<span class="text-label-code-sm font-label-code-sm text-outline font-normal">Housekeeping &amp; minor compliance tasks</span>
+</div>
+</div>
+<!-- Task List -->
+<div class="space-y-2 mt-3">
+<div class="bg-surface-container/60 border border-outline-variant/20 rounded-lg p-2 flex items-start justify-between gap-3">
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="check_circle">check_circle</span>
+                  Add missing alt text to 12 footer partner logos
+                </div>
+<span class="text-label-code-sm font-label-code-sm text-outline shrink-0">+0.2 Score</span>
+</div>
+<div class="bg-surface-container/60 border border-outline-variant/20 rounded-lg p-2 flex items-start justify-between gap-3">
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="check_circle">check_circle</span>
+                  Update copyright year in Organization schema markup
+                </div>
+<span class="text-label-code-sm font-label-code-sm text-outline shrink-0">+0.1 Score</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant/20 flex items-center justify-between text-label-code-sm font-label-code-sm">
+<span class="text-outline">Good for interns or batch scripts</span>
+<span class="text-outline">Priority: Backlog P3</span>
+</div>
+</div>
+<!-- Quadrant 4: Thankless Tasks (Low Impact, High Effort) -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-md relative overflow-hidden flex flex-col justify-between opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute top-0 right-0 bg-surface-container-highest text-outline font-label-code-sm text-[11px] font-medium px-3 py-0.5 rounded-bl-lg tracking-wide uppercase">
+            Deprioritize
+          </div>
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-outline" data-icon="hourglass_empty">hourglass_empty</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Quadrant 4: Low Impact • High Effort</h3>
+<span class="text-label-code-sm font-label-code-sm text-outline font-normal">Complex refactors yielding negligible ranking shift</span>
+</div>
+</div>
+<!-- Task List -->
+<div class="space-y-2 mt-3">
+<div class="bg-surface-container/40 border border-outline-variant/20 rounded-lg p-2 flex items-start justify-between gap-3">
+<div class="text-body-sm font-body-sm text-outline flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-error" data-icon="block">block</span>
+                  Refactor legacy CSS stylesheets across historical 2018 archive templates
+                </div>
+<span class="text-label-code-sm font-label-code-sm text-outline shrink-0">+0.3 Score</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant/20 flex items-center justify-between text-label-code-sm font-label-code-sm">
+<span class="text-error font-medium">Flagged to prevent resource waste</span>
+<span class="text-outline">Recommendation: Deprecate</span>
+</div>
+</div>
+</div>
+</section>
+<!-- DIAGNOSTIC AUDIT MODULE CARDS (3-Column Grid) -->
+<section class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Audit Domain Modules</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Deep telemetry streams grouped by search engine crawling and indexing pipelines.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-gutter">
+<!-- CARD 1: Crawl & Indexability -->
+<div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-space-lg flex flex-col justify-between hover:border-tertiary/60 transition-all duration-200">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-3 border-b border-outline-variant/20">
+<div class="space-y-1">
+<span class="text-label-code-sm font-label-code-sm text-outline uppercase tracking-wider">Module 01</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Crawl &amp; Indexability</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-tertiary border border-tertiary/30 text-label-code-sm font-label-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Pass / Alert
+              </span>
+</div>
+<!-- Score bar -->
+<div class="my-4 space-y-1">
+<div class="flex justify-between items-center text-label-code-sm font-label-code-sm">
+<span class="text-outline">Health Score</span>
+<span class="text-on-surface font-bold">82 / 100</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- Diagnostic Telemetry Grid -->
+<div class="grid grid-cols-2 gap-2 my-4">
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">HTTP 4xx/5xx</span>
+<span class="text-headline-sm font-headline-sm font-bold text-error">18 Errors</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">Redirects</span>
+<span class="text-headline-sm font-headline-sm font-bold text-secondary">45 Hops</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">Robots.txt</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary">0 Blocked</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">Avg TTFB</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface font-label-code-md">240ms</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-primary border border-outline-variant/30 text-label-code-sm font-label-code-sm font-semibold flex items-center justify-between transition-colors">
+<span>Inspect 18 Issues</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- CARD 2: Core Web Vitals & Performance -->
+<div class="bg-surface-container-low border border-secondary/40 rounded-xl p-space-lg flex flex-col justify-between shadow-[0_0_20px_-8px_rgba(99,102,241,0.25)] hover:border-secondary transition-all duration-200">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-3 border-b border-outline-variant/20">
+<div class="space-y-1">
+<span class="text-label-code-sm font-label-code-sm text-outline uppercase tracking-wider">Module 02</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Core Web Vitals</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 text-label-code-sm font-label-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Needs Attention
+              </span>
+</div>
+<!-- Score bar -->
+<div class="my-4 space-y-1">
+<div class="flex justify-between items-center text-label-code-sm font-label-code-sm">
+<span class="text-outline">Health Score</span>
+<span class="text-secondary font-bold">64 / 100</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 64%"></div>
+</div>
+</div>
+<!-- Diagnostic Telemetry Grid -->
+<div class="grid grid-cols-2 gap-2 my-4">
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">LCP (Largest Content)</span>
+<span class="text-headline-sm font-headline-sm font-bold text-error">3.4s <span class="text-label-code-sm font-normal text-error">[Poor]</span></span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">FID (Input Delay)</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary">18ms <span class="text-label-code-sm font-normal text-tertiary">[Good]</span></span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">CLS (Layout Shift)</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary">0.04 <span class="text-label-code-sm font-normal text-tertiary">[Good]</span></span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">Total Page Weight</span>
+<span class="text-headline-sm font-headline-sm font-bold text-secondary font-label-code-md">4.8MB</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-primary border border-outline-variant/30 text-label-code-sm font-label-code-sm font-semibold flex items-center justify-between transition-colors">
+<span>Optimize Asset Weight</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- CARD 3: Semantic & Metadata Architecture -->
+<div class="bg-surface-container-low border border-outline-variant/40 rounded-xl p-space-lg flex flex-col justify-between hover:border-tertiary/60 transition-all duration-200">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between pb-3 border-b border-outline-variant/20">
+<div class="space-y-1">
+<span class="text-label-code-sm font-label-code-sm text-outline uppercase tracking-wider">Module 03</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">Semantic &amp; Metadata</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary border border-tertiary/30 text-label-code-sm font-label-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Optimal
+              </span>
+</div>
+<!-- Score bar -->
+<div class="my-4 space-y-1">
+<div class="flex justify-between items-center text-label-code-sm font-label-code-sm">
+<span class="text-outline">Health Score</span>
+<span class="text-tertiary font-bold">92 / 100</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Diagnostic Telemetry Grid -->
+<div class="grid grid-cols-2 gap-2 my-4">
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">H1 Hierarchy</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary">100% Clean</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">OpenGraph Tags</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary">94% Present</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">JSON-LD Schema</span>
+<span class="text-headline-sm font-headline-sm font-bold text-secondary">2 Missing</span>
+</div>
+<div class="bg-surface-container p-2.5 rounded-lg border border-outline-variant/20">
+<span class="text-label-code-sm font-label-code-sm text-outline block">Language Decl.</span>
+<span class="text-headline-sm font-headline-sm font-bold text-tertiary font-label-code-md">Valid (en)</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-primary border border-outline-variant/30 text-label-code-sm font-label-code-sm font-semibold flex items-center justify-between transition-colors">
+<span>View Graph Schemas</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- LIVE TELEMETRY CRAWL STREAM TERMINAL -->
+<section class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-space-md font-label-code-sm text-label-code-sm">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/20 mb-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-on-surface font-semibold uppercase tracking-wider">Live Bot Dispatch Stream: Googlebot-Desktop / Chrome 124.0.0</span>
+</div>
+<span class="text-outline">Socket Connected • 42 req/s</span>
+</div>
+<div class="space-y-1.5 text-on-surface-variant/90 max-h-32 overflow-y-auto pr-2">
+<div class="flex items-center justify-between hover:bg-surface-container/50 px-2 py-0.5 rounded">
+<span class="text-outline">16:42:19.014</span>
+<span class="text-tertiary font-bold">200 OK</span>
+<span class="text-on-surface font-mono">GET /products/footwear/trail-runner-v2</span>
+<span class="text-outline">184ms • text/html</span>
+<span class="text-tertiary">Indexed</span>
+</div>
+<div class="flex items-center justify-between hover:bg-surface-container/50 px-2 py-0.5 rounded">
+<span class="text-outline">16:42:18.982</span>
+<span class="text-secondary font-bold">301 REDIR</span>
+<span class="text-on-surface font-mono">GET /assets/brand-badge.svg</span>
+<span class="text-outline">62ms • image/svg+xml</span>
+<span class="text-secondary">Chain 2x</span>
+</div>
+<div class="flex items-center justify-between hover:bg-surface-container/50 px-2 py-0.5 rounded">
+<span class="text-outline">16:42:18.420</span>
+<span class="text-error font-bold">404 NOT FOUND</span>
+<span class="text-error font-mono">GET /cdn-cgi/l/email-protection</span>
+<span class="text-outline">210ms • text/html</span>
+<span class="text-error">Flagged P0</span>
+</div>
+<div class="flex items-center justify-between hover:bg-surface-container/50 px-2 py-0.5 rounded">
+<span class="text-outline">16:42:17.890</span>
+<span class="text-tertiary font-bold">200 OK</span>
+<span class="text-on-surface font-mono">GET /sitemap.xml</span>
+<span class="text-outline">48ms • application/xml</span>
+<span class="text-tertiary">Parsed 1,420 URLs</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seo Overiter — Enterprise SEO Auditor & AI Overview Telemetry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <a href="#" class="brand-logo" id="brand-home-link">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/>
+        </svg>
+        <span>SEO OVERITER</span>
+      </a>
+      <div class="live-pulse-badge">
+        <span class="pulse-dot"></span>
+        <span id="header-stream-status">Telemetry Active</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <button class="nav-btn active" data-view="view-landing">Home</button>
+      <button class="nav-btn" data-view="view-dashboard">Dashboard</button>
+      <button class="nav-btn" data-view="view-telemetry">Live Crawl</button>
+      <button class="nav-btn" data-view="view-compare">Competitor</button>
+      <button class="nav-btn" data-view="view-serp">SERP & AEO</button>
+      <button class="nav-btn" data-view="view-monitor">24/7 Monitor</button>
+      <button class="nav-btn" data-view="view-export">White-Label</button>
+    </nav>
+
+    <div class="header-actions">
+      <div class="quick-url-input">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" style="margin-right: 6px;">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <input type="text" id="header-url-input" placeholder="https://example.com" value="https://example.com">
+      </div>
+      <button class="btn btn-primary" id="btn-header-scan">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/>
+          <polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        <span>Audit</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Viewports Container -->
+  <main class="app-container">
+
+    <!-- VIEW 1: LANDING & LAUNCHPAD -->
+    <section id="view-landing" class="view-section active">
+      <div class="hero-wrapper">
+        <div class="hero-tag">
+          <span>⚡ CRAWL ENGINE V2.4</span>
+          <span>•</span>
+          <span>25 DIAGNOSTIC MODULES ACTIVE</span>
+        </div>
+        <h1 class="hero-title">Diagnose. Optimize. Outrank.</h1>
+        <p class="hero-subtitle">The enterprise technical SEO auditor and Google AI Overview (AEO) readiness platform.</p>
+
+        <div class="hero-input-box">
+          <input type="url" id="hero-url-input" class="url-field" placeholder="Enter target website (e.g. https://yourdomain.com)" value="https://example.com">
+          <button class="btn btn-primary" id="btn-hero-start">
+            <span>START AUDIT →</span>
+          </button>
+        </div>
+
+        <div class="scan-options">
+          <div class="scan-pill active" data-type="quick">
+            <span>⚡ Single-Page Quick Scan</span>
+          </div>
+          <div class="scan-pill" data-type="deep">
+            <span>🕷️ Full-Site Deep Crawl</span>
+          </div>
+          <div class="scan-pill" data-type="compare">
+            <span>⚔️ Competitor Head-to-Head</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left; margin-top: 2rem;">
+          <div style="background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="color: var(--brand-primary); font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Live Stream Telemetry</h3>
+            <p style="color: var(--text-medium); font-size: 13px;">Watch the real-time Googlebot crawler inspect TTFB, Core Web Vitals, and DOM rendering live.</p>
+          </div>
+          <div style="background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="color: #10b981; font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">AI Overview (AEO) Scorer</h3>
+            <p style="color: var(--text-medium); font-size: 13px;">Evaluates how likely Google Gemini and ChatGPT Search are to cite your content in generative answers.</p>
+          </div>
+          <div style="background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="color: #f59e0b; font-size: 1.5rem; margin-bottom: 0.5rem;">🚀</div>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Impact vs Effort Matrix</h3>
+            <p style="color: var(--text-medium); font-size: 13px;">Automatically triages all audit discoveries into actionable Quick Wins, Major Projects, and Fill-ins.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: LIVE STREAMING TELEMETRY -->
+    <section id="view-telemetry" class="view-section">
+      <div class="telemetry-progress-banner">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);">ACTIVE AUDIT SESSION</span>
+            <h2 style="font-size: 1.3rem; font-weight: 700;" id="live-target-url">https://example.com</h2>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-secondary" id="btn-pause-stream">Pause</button>
+            <button class="btn btn-danger" id="btn-cancel-stream">Cancel Audit</button>
+          </div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="telemetry-progress-bar" style="width: 0%;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--text-medium);">
+          <span>PROGRESS: <strong id="telemetry-progress-pct" style="color: #fff;">0%</strong></span>
+          <span>COMPLETED: <strong id="telemetry-completed-count" style="color: #fff;">0</strong> / 25 MODULES</span>
+          <span>CONCURRENCY: <strong style="color: #10b981;">8 WORKERS ACTIVE</strong></span>
+        </div>
+      </div>
+
+      <div class="telemetry-layout">
+        <!-- Left: 25 Pipeline Modules Checklist -->
+        <div>
+          <div class="section-header">
+            <h3 class="section-title">Diagnostic Pipeline (25 Modules)</h3>
+            <span id="modules-completed-badge" class="status-chip pass">0/25 Done</span>
+          </div>
+          <div class="pipeline-checklist" id="pipeline-checklist-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Right: Terminal Console & Live Viewport -->
+        <div>
+          <div class="section-header">
+            <h3 class="section-title">Live Socket Telemetry (/dev/crawler-stream.sock)</h3>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Googlebot v2.1 Emulated</span>
+          </div>
+          <div class="terminal-console">
+            <div class="terminal-header">
+              <div style="display: flex; gap: 6px;">
+                <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+              </div>
+              <span style="color: var(--text-muted); font-size: 11px;">AUTO-SCROLL: ON</span>
+              <button style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 11px;" id="btn-clear-terminal">Clear</button>
+            </div>
+            <div class="terminal-logs" id="terminal-logs-container">
+              <!-- Streaming logs inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: MASTER EXECUTIVE DASHBOARD -->
+    <section id="view-dashboard" class="view-section">
+      <!-- SEO Health Score Hero -->
+      <div class="score-hero-card">
+        <div class="score-left-col">
+          <div class="gauge-wrapper" id="score-gauge-container">
+            <!-- Radial SVG Gauge renders here -->
+          </div>
+          <div class="score-meta-badge">
+            <div class="score-grade" id="dash-score-grade">GRADE B</div>
+            <div class="score-status-desc" id="dash-grade-desc">Good - Minor Action Items</div>
+          </div>
+        </div>
+
+        <div class="score-right-col">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">AUDIT TARGET DOMAIN</span>
+              <h2 style="font-size: 1.25rem; font-weight: 700;" id="dash-domain-title">https://example.com</h2>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary" id="btn-dash-rescan">↻ Re-Scan</button>
+              <button class="btn btn-secondary" id="btn-export-json" title="Download Machine-Readable JSON Report">📥 JSON</button>
+              <button class="btn btn-secondary" id="btn-export-md" title="Download Markdown Report for GitHub/Notion">📄 Markdown</button>
+              <button class="btn btn-secondary" id="btn-export-html" title="Download Standalone Single-File HTML Report">🌐 HTML</button>
+              <button class="btn btn-primary" id="btn-dash-export">🎨 White-Label Studio & PDF →</button>
+            </div>
+          </div>
+
+          <!-- Dimension Progress Bars -->
+          <div class="dimension-row">
+            <div class="dim-labels">
+              <span>Technical Crawl (30%)</span>
+              <span id="dim-score-tech" style="font-family: var(--font-mono); color: #10b981;">82/100</span>
+            </div>
+            <div class="dim-bar-track">
+              <div class="dim-bar-fill" id="dim-bar-tech" style="width: 82%; background: #10b981;"></div>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dim-labels">
+              <span>Core Web Vitals & Speed (25%)</span>
+              <span id="dim-score-speed" style="font-family: var(--font-mono); color: #f59e0b;">64/100</span>
+            </div>
+            <div class="dim-bar-track">
+              <div class="dim-bar-fill" id="dim-bar-speed" style="width: 64%; background: #f59e0b;"></div>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dim-labels">
+              <span>On-Page & Semantic Hierarchy (20%)</span>
+              <span id="dim-score-onpage" style="font-family: var(--font-mono); color: #10b981;">92/100</span>
+            </div>
+            <div class="dim-bar-track">
+              <div class="dim-bar-fill" id="dim-bar-onpage" style="width: 92%; background: #10b981;"></div>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="dim-labels">
+              <span>Content Quality & Information Gain (15%)</span>
+              <span id="dim-score-content" style="font-family: var(--font-mono); color: #f59e0b;">71/100</span>
+            </div>
+            <div class="dim-bar-track">
+              <div class="dim-bar-fill" id="dim-bar-content" style="width: 71%; background: #f59e0b;"></div>
+            </div>
+          </div>
+
+          <div class="dimension-row" style="margin-bottom: 0;">
+            <div class="dim-labels">
+              <span>Security & Trust Policies (10%)</span>
+              <span id="dim-score-trust" style="font-family: var(--font-mono); color: #10b981;">95/100</span>
+            </div>
+            <div class="dim-bar-track">
+              <div class="dim-bar-fill" id="dim-bar-trust" style="width: 95%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Quadrant Priority Matrix -->
+      <div class="matrix-container">
+        <div class="section-header">
+          <h3 class="section-title">Prioritized Impact vs Effort Action Matrix</h3>
+          <span style="color: var(--text-muted); font-size: 12px;">Ranked for Top-3 SERP Momentum</span>
+        </div>
+        <div class="matrix-grid">
+          <!-- Quadrant 1: Quick Wins -->
+          <div class="matrix-quadrant" style="border-top: 2px solid #10b981;">
+            <div class="quadrant-header">
+              <span class="quadrant-title" style="color: #10b981;">🚀 1. Quick Wins</span>
+              <span class="quadrant-tag">HIGH IMPACT • LOW EFFORT</span>
+            </div>
+            <div id="matrix-quick-wins-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Quadrant 2: Major Projects -->
+          <div class="matrix-quadrant" style="border-top: 2px solid var(--brand-primary);">
+            <div class="quadrant-header">
+              <span class="quadrant-title" style="color: #c0c1ff;">🏗️ 2. Major Projects</span>
+              <span class="quadrant-tag">HIGH IMPACT • HIGH EFFORT</span>
+            </div>
+            <div id="matrix-major-projects-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Quadrant 3: Fill-ins -->
+          <div class="matrix-quadrant" style="border-top: 2px solid #f59e0b;">
+            <div class="quadrant-header">
+              <span class="quadrant-title" style="color: #f59e0b;">☕ 3. Fill-Ins</span>
+              <span class="quadrant-tag">LOW IMPACT • LOW EFFORT</span>
+            </div>
+            <div id="matrix-fillins-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Quadrant 4: Low Priority -->
+          <div class="matrix-quadrant" style="border-top: 2px solid var(--text-muted);">
+            <div class="quadrant-header">
+              <span class="quadrant-title" style="color: var(--text-muted);">⏳ 4. Low Priority</span>
+              <span class="quadrant-tag">LOW IMPACT • HIGH EFFORT</span>
+            </div>
+            <div id="matrix-low-priority-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 25 Diagnostic Module Cards Grid -->
+      <div style="margin-top: 2rem;">
+        <div class="section-header">
+          <h3 class="section-title">All Diagnostic Modules (25 Active)</h3>
+          <div class="module-filter-bar">
+            <span class="filter-chip active" data-filter="all">All (25)</span>
+            <span class="filter-chip" data-filter="crit">Critical</span>
+            <span class="filter-chip" data-filter="warn">Warnings</span>
+            <span class="filter-chip" data-filter="pass">Passed</span>
+          </div>
+        </div>
+        <div class="modules-grid" id="dashboard-modules-grid">
+          <!-- 25 module cards render here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: COMPETITOR HEAD-TO-HEAD -->
+    <section id="view-compare" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">Competitor Head-to-Head & Semantic Gap Battle</h2>
+        <span style="color: var(--text-muted); font-size: 12px;">Real-Time Dual URL Benchmarking</span>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium);">
+        <input type="text" id="compare-url-1" class="quick-url-input" style="flex: 1; width: auto;" placeholder="Your URL (https://yoursite.com)" value="https://example.com">
+        <span style="display: flex; align-items: center; font-weight: 700; color: var(--text-muted);">VS</span>
+        <input type="text" id="compare-url-2" class="quick-url-input" style="flex: 1; width: auto;" placeholder="Competitor URL (https://competitor.com)" value="https://wikipedia.org">
+        <button class="btn btn-primary" id="btn-run-compare">Compare Now</button>
+      </div>
+
+      <div class="compare-hero">
+        <!-- Left: Spider Radar Chart -->
+        <div class="compare-site-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 1rem; font-weight: 700;">6-Axis Spider Radar Benchmark</h3>
+            <div style="display: flex; gap: 0.75rem; font-family: var(--font-mono); font-size: 11px;">
+              <span style="color: #6366f1;">■ Your Site</span>
+              <span style="color: #f59e0b;">■ Competitor</span>
+            </div>
+          </div>
+          <div class="radar-wrapper" id="spider-radar-container">
+            <!-- SVG Radar renders here -->
+          </div>
+        </div>
+
+        <!-- Right: Side-by-Side Table & Missing Semantic Gap -->
+        <div class="compare-site-card">
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Side-by-Side Metric Analysis</h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-medium); text-align: left; color: var(--text-muted);">
+                <th style="padding: 8px;">Metric</th>
+                <th style="padding: 8px; color: #6366f1;">Your Site</th>
+                <th style="padding: 8px; color: #f59e0b;">Competitor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 8px; font-weight: 600;">Overall Health</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-score-1">78 / 100</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-score-2">89 / 100</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 8px; font-weight: 600;">Est. LCP Speed</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-lcp-1">3.4s 🔴</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-lcp-2">1.4s 🟢</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 8px; font-weight: 600;">Word Count</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-words-1">1,240</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-words-2">3,450</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 8px; font-weight: 600;">Internal Links</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-links-1">14</td>
+                <td style="padding: 8px; font-family: var(--font-mono);" id="cmp-links-2">82</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top: 1.5rem;">
+            <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;">
+              Missing Semantic Entities (Competitor Has, You Lack):
+            </h4>
+            <div class="entity-tags-grid" id="compare-missing-entities">
+              <span class="entity-pill">JSON-LD Breadcrumbs</span>
+              <span class="entity-pill">INP interaction tuning</span>
+              <span class="entity-pill">Server-Side Faceted Cache</span>
+              <span class="entity-pill">Author Authority Schema</span>
+              <span class="entity-pill">WebP Next-Gen Media</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: SERP & AI OVERVIEW (AEO) SIMULATOR -->
+    <section id="view-serp" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">SERP Snippet & Google AI Overview (AEO) Simulator</h2>
+        <span style="color: var(--text-muted); font-size: 12px;">Human Searchers vs Generative Answer Engines</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <!-- Google Search Snippet (Desktop & Mobile) -->
+        <div>
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Google Search Result Preview</h3>
+          <div class="serp-card">
+            <div class="serp-url" id="serp-preview-url">https://example.com › blog › seo-audit</div>
+            <div class="serp-title" id="serp-preview-title">Technical SEO Audit & Google Ranking Guide (2026 Updated)</div>
+            <div class="serp-snippet" id="serp-preview-desc">Master every facet of modern technical SEO from crawl budgets and Core Web Vitals to AI Overview optimization. Discover our 25-step audit checklist to rank in Top 3.</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); display: flex; gap: 1.5rem;">
+            <span>TITLE WIDTH: <strong id="serp-title-val" style="color: #10b981;">540px / 600px Max [OK]</strong></span>
+            <span>META DESC: <strong id="serp-desc-val" style="color: #10b981;">148 / 160 chars [OK]</strong></span>
+          </div>
+        </div>
+
+        <!-- Google Gemini / AI Overview Box -->
+        <div>
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Google AI Overview (AEO) Extraction</h3>
+          <div class="aeo-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.25rem;">✨</span>
+                <span style="font-weight: 700; color: #fff;">AI Overview (Generated Answer)</span>
+              </div>
+              <span class="status-chip pass" id="aeo-citation-badge">88% Citation Confidence</span>
+            </div>
+            <p style="color: var(--text-high); line-height: 1.6; margin-bottom: 1rem;" id="aeo-extracted-answer">
+              "Seo Overiter is an automated technical auditing framework that inspects 25 distinct diagnostic modules including Core Web Vitals, JSON-LD structured data, and semantic entity depth to help websites capture Top 3 Google positions."
+            </p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+              <span>CITED SOURCE:</span>
+              <span style="background: rgba(99, 102, 241, 0.2); border: 1px solid var(--border-focus); padding: 2px 8px; border-radius: var(--radius-sm); color: #c0c1ff;" id="aeo-source-pill">example.com/features</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: 24/7 MONITORING & INCIDENT RADAR -->
+    <section id="view-monitor" class="view-section">
+      <div class="section-header">
+        <h2 class="section-title">24/7 SEO Monitoring & Drift Detection Radar</h2>
+        <button class="btn btn-primary" id="btn-add-monitor-target">+ Add Monitored Target</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem;">
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Active Monitored Domains</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;" id="active-monitored-domains-list">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-surface-elevated); border-radius: var(--radius-sm);">
+              <div>
+                <strong>example.com</strong>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Daily crawl • Next in 24 mins</div>
+              </div>
+              <span class="status-chip pass">100% HEALTHY</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-surface-elevated); border-radius: var(--radius-sm);">
+              <div>
+                <strong>shop-client.io</strong>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Hourly probe • Alert Dispatched</div>
+              </div>
+              <span class="status-chip crit">DRIFT DETECTED</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--bg-surface-elevated); border-radius: var(--radius-sm);">
+              <div>
+                <strong>saas-portal.com</strong>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">Daily crawl • Passing</div>
+              </div>
+              <span class="status-chip pass">96/100 PASS</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem;">
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Incident History Timeline</h3>
+          <div style="font-size: 12px; display: flex; flex-direction: column; gap: 0.75rem;" id="incident-history-timeline">
+            <div style="border-left: 2px solid #ef4444; padding-left: 10px;">
+              <span style="color: #ef4444; font-weight: 600;">13:40 - shop-client.io</span>
+              <p style="color: var(--text-medium);">Accidental `noindex` injected into /catalog template. Alert sent to #seo-alerts on Slack.</p>
+            </div>
+            <div style="border-left: 2px solid #f59e0b; padding-left: 10px;">
+              <span style="color: #f59e0b; font-weight: 600;">11:15 - example.com</span>
+              <p style="color: var(--text-medium);">LCP increased by 1.2s due to unoptimized promo image upload.</p>
+            </div>
+            <div style="border-left: 2px solid #10b981; padding-left: 10px;">
+              <span style="color: #10b981; font-weight: 600;">08:00 - Routine Automated Crawl</span>
+              <p style="color: var(--text-medium);">All 3 targets probed successfully with Googlebot user-agent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 7: WHITE-LABEL REPORT EXPORT -->
+    <section id="view-export" class="view-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Client Report & White-Label Generator</h2>
+          <span style="color: var(--text-muted); font-size: 12px;">Export in Machine-Readable JSON, Markdown, Standalone HTML, or PDF</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary" id="btn-export-wl-json">📥 Download JSON</button>
+          <button class="btn btn-secondary" id="btn-export-wl-md">📄 Download Markdown</button>
+          <button class="btn btn-secondary" id="btn-export-wl-html">🌐 Standalone HTML</button>
+          <button class="btn btn-primary" id="btn-print-pdf">🖨️ Print / Save PDF</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 360px 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+        <!-- Controls -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem;">
+          <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Agency & Client Branding</h3>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div>
+              <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px;">Agency / Consultant Name</label>
+              <input type="text" id="report-agency-name" class="quick-url-input" style="width: 100%;" value="Apex Growth Digital">
+            </div>
+            <div>
+              <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px;">Client / Target Company</label>
+              <input type="text" id="report-client-name" class="quick-url-input" style="width: 100%;" value="Acme Corporation">
+            </div>
+            <div>
+              <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px;">Accent Brand Color</label>
+              <input type="color" id="report-color-picker" value="#6366f1" style="height: 36px; width: 100%; background: transparent; border: 1px solid var(--border-medium); border-radius: 4px; cursor: pointer;">
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
+              <span style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 0.5rem;">Include Sections in Export:</span>
+              <label style="font-size: 12px; display: block; margin-bottom: 4px;"><input type="checkbox" checked id="chk-inc-summary"> Executive Health Score & Dimensions</label>
+              <label style="font-size: 12px; display: block; margin-bottom: 4px;"><input type="checkbox" checked id="chk-inc-matrix"> 4-Quadrant Impact vs Effort Matrix</label>
+              <label style="font-size: 12px; display: block; margin-bottom: 4px;"><input type="checkbox" checked id="chk-inc-modules"> 25-Point Diagnostic Technical Breakdown</label>
+              <label style="font-size: 12px; display: block; margin-bottom: 4px;"><input type="checkbox" checked id="chk-inc-code"> Actionable Developer Fix Code Snippets</label>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+              <button class="btn btn-secondary" id="btn-save-report-disk" style="width: 100%;">💾 Save Copy to Server Disk</button>
+              <span id="save-report-status" style="font-size: 11px; color: #10b981; text-align: center;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Cover Mockup -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 2.5rem; text-align: center; max-width: 650px; margin: 0 auto; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.5);" id="pdf-report-preview">
+          <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--brand-primary); margin-bottom: 1rem;" id="cover-agency-title">APEX GROWTH DIGITAL</div>
+          <h1 style="font-size: 1.8rem; margin-bottom: 0.5rem;">EXECUTIVE SEO AUDIT REPORT</h1>
+          <p style="color: var(--text-medium); font-size: 13px; margin-bottom: 2rem;">Prepared for: <strong id="cover-client-title">Acme Corporation</strong> • Target: <span id="cover-target-url" style="color: #fff; font-family: var(--font-mono);">https://example.com</span></p>
+          <div style="background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2rem; display: inline-block; min-width: 240px;">
+            <div style="font-size: 3.5rem; font-weight: 800; color: #10b981; font-family: var(--font-mono);" id="cover-score-display">78 / 100</div>
+            <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted);" id="cover-grade-display">Verified Health Score (Grade B)</div>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 2rem;">This comprehensive report evaluates 25 technical SEO modules, Core Web Vitals lab benchmarks, and AI Overview citation readiness.</p>
+        </div>
+      </div>
+
+      <!-- Saved Reports History Section -->
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1rem; font-weight: 700;">📂 Generated Server Reports Archive</h3>
+          <button class="btn btn-secondary" id="btn-refresh-reports" style="height: 28px; font-size: 11px;">↻ Refresh Archive</button>
+        </div>
+        <div id="saved-reports-container" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 13px;">
+          <div style="color: var(--text-muted);">Loading recent reports...</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Module Deep-Dive & AI Fix Modal -->
+  <div class="modal-overlay" id="deepdive-modal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);" id="modal-mod-category">TECHNICAL CRAWL</span>
+          <h3 style="font-size: 1.25rem; font-weight: 700;" id="modal-mod-title">Module Title</h3>
+        </div>
+        <button class="btn btn-secondary" style="height: 28px; padding: 0 10px;" id="btn-close-modal">✕</button>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center; background: var(--bg-canvas); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+        <span style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700;" id="modal-mod-score">82/100</span>
+        <span id="modal-mod-badge" class="status-chip pass">Optimal</span>
+        <span style="font-size: 12px; color: var(--text-medium);" id="modal-mod-metric">Metric readout</span>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;">Detected Issues & Bottlenecks:</h4>
+        <div id="modal-mod-issues-list" style="font-size: 13px;">
+          <!-- Issues list -->
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;">One-Click Developer Fix Code:</h4>
+        <pre class="code-snippet" id="modal-mod-code">// Code snippet</pre>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
+        <button class="btn btn-secondary" id="btn-copy-fix-code">Copy Fix Code</button>
+        <button class="btn btn-primary" id="btn-modal-dismiss">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Monitored Target Modal -->
+  <div class="modal-overlay" id="add-monitor-modal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">+ Add Monitored Target</h3>
+        <button class="btn btn-secondary" style="height: 28px; padding: 0 10px;" id="btn-close-monitor-modal">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+        <div>
+          <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px;">Target Website URL</label>
+          <div class="quick-url-input" style="width: 100%; height: 38px;">
+            <input type="url" id="monitor-new-url" placeholder="https://yourclient.com" value="https://">
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px;">Check Frequency</label>
+          <select id="monitor-new-frequency" style="width: 100%; height: 38px; background: var(--bg-surface-elevated); border: 1px solid var(--border-medium); border-radius: var(--radius-sm); padding: 0 10px; color: #fff; font-size: 13px; outline: none;">
+            <option value="Hourly Sentinel probe • Next in 59 mins">Hourly Sentinel probe (Critical drift & noindex alert)</option>
+            <option value="Daily crawl • Next in 24 hrs" selected>Daily Deep Crawl (All 25 diagnostic modules)</option>
+            <option value="Weekly digest • Next in 7 days">Weekly Executive Digest</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+        <button class="btn btn-secondary" id="btn-cancel-monitor-modal">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-monitor-target">Activate 24/7 Monitor</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
