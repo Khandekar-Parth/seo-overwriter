@@ -22,6 +22,47 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// Normalize multiple leading slashes (e.g. //sitemap.xml created when user inputs /sitemap.xml in GSC)
+app.use((req, res, next) => {
+  if (req.url && req.url.startsWith('//')) {
+    req.url = req.url.replace(/^\/+/, '/');
+  }
+  next();
+});
+
+// Dynamic robots.txt
+app.get(['/robots.txt', '//robots.txt'], (req, res) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.send(`User-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`);
+});
+
+// Dynamic sitemap.xml
+app.get(['/sitemap.xml', '//sitemap.xml', '/sitemap'], (req, res) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+  const today = new Date().toISOString().split('T')[0];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.status(200).send(xml);
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/reports', express.static(path.join(__dirname, 'reports')));
 
