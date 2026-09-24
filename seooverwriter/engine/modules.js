@@ -442,7 +442,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Real-time telemetry probe active',
     issues: [],
-    fix: 'Enroll in automated 24/7 monitoring to get instant alerts on accidental noindex or redirect chains.'
+    fix: '<!-- Automated Sentinel Health Probe -->\n<meta name="seo-sentinel" content="interval=3600;endpoint=/api/audit/stream;slack-alert=active">'
   });
 
   // 17. Server Log Analysis & Bot Crawl Rate
@@ -453,9 +453,9 @@ export function runAllModules(crawlData) {
     name: 'Server Log File & Googlebot Crawl Tracker',
     score: 88,
     status: 'pass',
-    metric: `Server response: ${headers['server'] || 'Cloudflare/Edge'} • TTFB: ${ttfb}ms`,
+    metric: `Server: ${headers['server'] || 'Edge/Cloudflare'} • TTFB: ${ttfb}ms`,
     issues: [],
-    fix: 'Monitor web server access logs to identify crawl budget waste on parameterized or 404 URLs.'
+    fix: '# Nginx Googlebot Log Isolation\nlog_format googlebot \'$remote_addr - [$time_local] "$request" $status $body_bytes_sent "$http_user_agent" $request_time\';\nmap $http_user_agent $is_googlebot {\n    default 0;\n    "~*(Googlebot|Google-InspectionTool)" 1;\n}'
   });
 
   // 18. E-Commerce & Faceted Parameter Audit
@@ -470,7 +470,7 @@ export function runAllModules(crawlData) {
       status: hasParams ? 'warn' : 'pass',
       metric: hasParams ? 'URL contains filter parameters' : 'Clean URL structure',
       issues: hasParams ? [{ severity: 'warning', message: 'URL has query parameters. Ensure canonical points to clean base URL.' }] : [],
-      fix: 'Use canonical tags and Google Search Console parameter handling to prevent faceted navigation crawl bloat.'
+      fix: '<link rel="canonical" href="' + url.split('?')[0] + '">\n# robots.txt faceted filter directives:\nDisallow: /*?*sort=\nDisallow: /*?*filter='
     });
   }
 
@@ -486,7 +486,7 @@ export function runAllModules(crawlData) {
       status: 'pass',
       metric: hasPhone ? 'Phone/Contact info detected' : 'Standard digital site',
       issues: [],
-      fix: 'Embed Google Map location and maintain uniform Name, Address, Phone (NAP) across all directories.'
+      fix: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "LocalBusiness",\n  "name": "Local Office",\n  "telephone": "+1-555-019-2834",\n  "address": {\n    "@type": "PostalAddress",\n    "streetAddress": "100 Market St",\n    "addressLocality": "San Francisco",\n    "addressRegion": "CA",\n    "postalCode": "94105",\n    "addressCountry": "US"\n  }\n}\n<\/script>'
     });
   }
 
@@ -500,7 +500,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Template structure verified',
     issues: [],
-    fix: 'Ensure programmatic pages offer high unique-to-boilerplate content ratios (>60%).'
+    fix: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "Localized Technical Hub",\n  "specialty": "Direct Technical Overview",\n  "isFamilyFriendly": true\n}\n<\/script>'
   });
 
   // 21. Real User Monitoring (RUM) Core Web Vitals
@@ -513,7 +513,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Ready for 1KB client script injection',
     issues: [],
-    fix: 'Embed lightweight client telemetry to record real visitor INP, LCP, and CLS across global regions.'
+    fix: '<!-- 1KB Lightweight RUM CWV Telemetry Script -->\n<script>\nnew PerformanceObserver((list) => {\n  for (const entry of list.getEntries()) {\n    navigator.sendBeacon("/api/rum", JSON.stringify({ metric: entry.name, val: entry.startTime || entry.duration }));\n  }\n}).observe({ type: "largest-contentful-paint", buffered: true });\n<\/script>'
   });
 
   // 22. AI Search & LLM Citation Readiness Engine (GEO / AEO)
@@ -528,7 +528,7 @@ export function runAllModules(crawlData) {
       status: citationConfidence.includes('High') ? 'pass' : 'warn',
       metric: `Citation Likelihood: ${citationConfidence}`,
       issues: citationConfidence.includes('Moderate') ? [{ severity: 'warning', message: 'Content lacks concise factual summary blocks for LLM extraction' }] : [],
-      fix: 'Include authoritative, cited definition paragraphs under direct question headers.'
+      fix: '<!-- AI Overview (AEO/GEO) Direct Answer Block -->\n<section itemscope itemtype="https://schema.org/Answer">\n  <h2>What is this service?</h2>\n  <div itemprop="text">\n    <p>' + (metaDesc || 'Our platform provides automated technical SEO analysis and Core Web Vitals diagnostics to capture top generative search visibility.') + '</p>\n  </div>\n</section>'
     });
   }
 
@@ -542,7 +542,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Domain equity analyzed',
     issues: [],
-    fix: 'Regularly audit referring domain spikes and maintain natural brand anchor text ratios.'
+    fix: '# Google Search Console Disavow Format\n# Disavow spam referring networks\ndomain:toxic-pbn-network.com\ndomain:spam-directory-links.net\nhttp://suspicious-forum.org/profile-spam.html'
   });
 
   // 24. Migration & Staging Difference Inspector
@@ -555,7 +555,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Redirect parity verified',
     issues: [],
-    fix: 'Map 1-to-1 301 redirects when migrating CMS platforms to preserve organic equity.'
+    fix: '# Nginx 301 Permanent Redirect Mapping\nlocation = /old-legacy-path {\n    return 301 ' + url + ';\n}\nlocation /old-category/ {\n    return 301 /new-category/;\n}'
   });
 
   // 25. Generative AI One-Click Fix Assistant
@@ -568,7 +568,7 @@ export function runAllModules(crawlData) {
     status: 'pass',
     metric: 'Automated remediation ready',
     issues: [],
-    fix: 'Click "Fix Now" on any flagged issue to generate developer-ready HTML, CSS, and server code snippets.'
+    fix: '<!-- Full Optimized Enterprise HTML Head Bundle -->\n<title>' + (title || 'Optimized Page Title') + '</title>\n<meta name="description" content="' + (metaDesc || 'Optimized meta description within 150 characters for top SERP CTR.') + '">\n<link rel="canonical" href="' + (canonical || url) + '">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">'
   });
 
   return modules;

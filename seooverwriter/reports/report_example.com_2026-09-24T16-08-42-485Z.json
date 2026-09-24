@@ -1,0 +1,583 @@
+{
+  "meta": {
+    "generator": "Seo Overiter Diagnostic Engine v2.4",
+    "generatedAt": "2026-09-24T16:08:42.486Z",
+    "agency": "Seo Overiter Agency",
+    "client": "Executive Client",
+    "targetUrl": "https://example.com",
+    "httpStatus": 200,
+    "ttfbMs": 19,
+    "pageMeta": {
+      "title": "Example Domain",
+      "description": "",
+      "canonical": "",
+      "h1Count": 1,
+      "imageCount": 0,
+      "linkCount": 1,
+      "wordCount": 17,
+      "discoveredCount": 1
+    }
+  },
+  "executiveSummary": {
+    "overallHealthScore": 81,
+    "letterGrade": "B",
+    "gradeDescription": "Good - Minor Action Items",
+    "dimensions": {
+      "technical": {
+        "score": 85,
+        "weight": "30%",
+        "label": "Technical Crawl"
+      },
+      "speed": {
+        "score": 90,
+        "weight": "25%",
+        "label": "Core Web Vitals"
+      },
+      "onpage": {
+        "score": 75,
+        "weight": "20%",
+        "label": "On-Page & Semantic"
+      },
+      "content": {
+        "score": 73,
+        "weight": "15%",
+        "label": "Content Quality"
+      },
+      "trust": {
+        "score": 71,
+        "weight": "10%",
+        "label": "Security & Trust"
+      }
+    }
+  },
+  "actionMatrix": {
+    "summary": {
+      "quickWinsCount": 2,
+      "majorProjectsCount": 2,
+      "fillInsCount": 11,
+      "lowPriorityCount": 1
+    },
+    "quickWins": [
+      {
+        "moduleId": "serp_aeo",
+        "moduleName": "SERP Preview & AI Overview (AEO) Readiness",
+        "title": "Missing meta description tag for SERP snippets",
+        "impact": "High Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+4.5",
+        "fix": "Craft a 140-character meta description with primary keyword and include 40-50 word direct definition answers below <h2> headers."
+      },
+      {
+        "moduleId": "schema_markup",
+        "moduleName": "Schema.org & JSON-LD Structured Data",
+        "title": "No JSON-LD structured data found on the page",
+        "impact": "High Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+4.5",
+        "fix": "Inject JSON-LD structured data for Organization, WebSite, BreadcrumbList, and Article/Product."
+      }
+    ],
+    "majorProjects": [
+      {
+        "moduleId": "content_quality",
+        "moduleName": "Content Quality & \"Information Gain\" Scorer",
+        "title": "Thin content detected: only 17 words on page (Recommended: > 600 words)",
+        "impact": "High Impact",
+        "effort": "High Effort",
+        "scoreEst": "+7.0",
+        "fix": "Expand topical depth with proprietary data findings, bulleted summary takeaways, and step-by-step numbered instructions."
+      },
+      {
+        "moduleId": "content_quality",
+        "moduleName": "Content Quality & \"Information Gain\" Scorer",
+        "title": "Content lacks structured data tables or bulleted lists to boost Information Gain score",
+        "impact": "Moderate Impact",
+        "effort": "Moderate Effort",
+        "scoreEst": "+3.2",
+        "fix": "Expand topical depth with proprietary data findings, bulleted summary takeaways, and step-by-step numbered instructions."
+      }
+    ],
+    "fillIns": [
+      {
+        "moduleId": "tech_crawl",
+        "moduleName": "Technical Crawl & Indexability",
+        "title": "Missing canonical tag (<link rel=\"canonical\">)",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Add <link rel=\"canonical\" href=\"https://example.com\"> to HTML <head>."
+      },
+      {
+        "moduleId": "semantic_hierarchy",
+        "moduleName": "Semantic On-Page & Heading Hierarchy",
+        "title": "No <h2> subheadings found; content lacks hierarchical outline",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Ensure exactly one descriptive <h1> tag matching search query intent, followed by logical <h2> and <h3> sub-sections."
+      },
+      {
+        "moduleId": "semantic_hierarchy",
+        "moduleName": "Semantic On-Page & Heading Hierarchy",
+        "title": "Title length is 14 chars (Recommended: 45–60 characters)",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Ensure exactly one descriptive <h1> tag matching search query intent, followed by logical <h2> and <h3> sub-sections."
+      },
+      {
+        "moduleId": "serp_aeo",
+        "moduleName": "SERP Preview & AI Overview (AEO) Readiness",
+        "title": "No question-based headings detected for Google AI Overview (AEO) extraction",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Craft a 140-character meta description with primary keyword and include 40-50 word direct definition answers below <h2> headers."
+      },
+      {
+        "moduleId": "eeat_trust",
+        "moduleName": "E-E-A-T & Trust Signals Verification",
+        "title": "No explicit author byline or author profile link detected",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Add visible author bylines linked to author bio pages and structured \"Person\" schema."
+      },
+      {
+        "moduleId": "eeat_trust",
+        "moduleName": "E-E-A-T & Trust Signals Verification",
+        "title": "Missing footer links to standard trust pages (Privacy Policy, Terms, About Us)",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Add visible author bylines linked to author bio pages and structured \"Person\" schema."
+      },
+      {
+        "moduleId": "internal_linking",
+        "moduleName": "Internal Linking & PageRank Flow",
+        "title": "Low internal link count (0 links). Page may be an architectural dead-end.",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Replace generic anchor text with descriptive topical keywords and link out to related cluster pages."
+      },
+      {
+        "moduleId": "security_headers",
+        "moduleName": "Security, SSL & Header Hygiene",
+        "title": "Strict-Transport-Security (HSTS) header is missing",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Configure HSTS (Strict-Transport-Security) and enforce HTTPS site-wide via 301 redirects."
+      },
+      {
+        "moduleId": "social_og",
+        "moduleName": "Open Graph & Social Share Preview",
+        "title": "Missing og:title social sharing meta tag",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Add <meta property=\"og:title\"> and <meta property=\"og:image\"> for high-CTR social and messaging shares."
+      },
+      {
+        "moduleId": "social_og",
+        "moduleName": "Open Graph & Social Share Preview",
+        "title": "Missing og:image social preview thumbnail tag",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "Add <meta property=\"og:title\"> and <meta property=\"og:image\"> for high-CTR social and messaging shares."
+      },
+      {
+        "moduleId": "llm_readiness",
+        "moduleName": "AI Search & LLM Citation Readiness (GEO)",
+        "title": "Content lacks concise factual summary blocks for LLM extraction",
+        "impact": "Low Impact",
+        "effort": "Low Effort",
+        "scoreEst": "+1.5",
+        "fix": "<!-- AI Overview (AEO/GEO) Direct Answer Block -->\n<section itemscope itemtype=\"https://schema.org/Answer\">\n  <h2>What is this service?</h2>\n  <div itemprop=\"text\">\n    <p>Our platform provides automated technical SEO analysis and Core Web Vitals diagnostics to capture top generative search visibility.</p>\n  </div>\n</section>"
+      }
+    ],
+    "lowPriority": [
+      {
+        "title": "Refactor legacy polyfill scripts across static archives",
+        "impact": "Low Impact",
+        "effort": "High Effort",
+        "scoreEst": "+0.5",
+        "fix": "Remove deprecated browser shims when modernizing build bundlers."
+      }
+    ]
+  },
+  "diagnosticModules": [
+    {
+      "id": "tech_crawl",
+      "index": 1,
+      "category": "technical",
+      "name": "Technical Crawl & Indexability",
+      "score": 85,
+      "status": "pass",
+      "metric": "Status 200 • Canonical: Missing",
+      "issueCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing canonical tag (<link rel=\"canonical\">)"
+        }
+      ],
+      "recommendedFix": "Add <link rel=\"canonical\" href=\"https://example.com\"> to HTML <head>."
+    },
+    {
+      "id": "cwv_performance",
+      "index": 2,
+      "category": "speed",
+      "name": "Core Web Vitals & Real-Time Performance",
+      "score": 95,
+      "status": "pass",
+      "metric": "LCP ~0.63s • TTFB 19ms • CLS ~0.01",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Preload primary hero image using <link rel=\"preload\" as=\"image\"> and add explicit width/height to all <img> tags."
+    },
+    {
+      "id": "semantic_hierarchy",
+      "index": 3,
+      "category": "onpage",
+      "name": "Semantic On-Page & Heading Hierarchy",
+      "score": 80,
+      "status": "pass",
+      "metric": "H1: 1 • H2: 0 • H3: 0",
+      "issueCount": 2,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "No <h2> subheadings found; content lacks hierarchical outline"
+        },
+        {
+          "severity": "warning",
+          "message": "Title length is 14 chars (Recommended: 45–60 characters)"
+        }
+      ],
+      "recommendedFix": "Ensure exactly one descriptive <h1> tag matching search query intent, followed by logical <h2> and <h3> sub-sections."
+    },
+    {
+      "id": "serp_aeo",
+      "index": 4,
+      "category": "onpage",
+      "name": "SERP Preview & AI Overview (AEO) Readiness",
+      "score": 45,
+      "status": "crit",
+      "metric": "AEO Readiness: 62% Moderate",
+      "issueCount": 2,
+      "issues": [
+        {
+          "severity": "critical",
+          "message": "Missing meta description tag for SERP snippets"
+        },
+        {
+          "severity": "warning",
+          "message": "No question-based headings detected for Google AI Overview (AEO) extraction"
+        }
+      ],
+      "recommendedFix": "Craft a 140-character meta description with primary keyword and include 40-50 word direct definition answers below <h2> headers."
+    },
+    {
+      "id": "content_quality",
+      "index": 5,
+      "category": "content",
+      "name": "Content Quality & \"Information Gain\" Scorer",
+      "score": 40,
+      "status": "crit",
+      "metric": "17 words • 0 tables • 0 lists",
+      "issueCount": 2,
+      "issues": [
+        {
+          "severity": "critical",
+          "message": "Thin content detected: only 17 words on page (Recommended: > 600 words)"
+        },
+        {
+          "severity": "warning",
+          "message": "Content lacks structured data tables or bulleted lists to boost Information Gain score"
+        }
+      ],
+      "recommendedFix": "Expand topical depth with proprietary data findings, bulleted summary takeaways, and step-by-step numbered instructions."
+    },
+    {
+      "id": "eeat_trust",
+      "index": 6,
+      "category": "trust",
+      "name": "E-E-A-T & Trust Signals Verification",
+      "score": 40,
+      "status": "crit",
+      "metric": "Author: Missing • Trust Pages: Missing",
+      "issueCount": 2,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "No explicit author byline or author profile link detected"
+        },
+        {
+          "severity": "warning",
+          "message": "Missing footer links to standard trust pages (Privacy Policy, Terms, About Us)"
+        }
+      ],
+      "recommendedFix": "Add visible author bylines linked to author bio pages and structured \"Person\" schema."
+    },
+    {
+      "id": "schema_markup",
+      "index": 7,
+      "category": "technical",
+      "name": "Schema.org & JSON-LD Structured Data",
+      "score": 55,
+      "status": "warn",
+      "metric": "0 schema blocks found",
+      "issueCount": 1,
+      "issues": [
+        {
+          "severity": "critical",
+          "message": "No JSON-LD structured data found on the page"
+        }
+      ],
+      "recommendedFix": "Inject JSON-LD structured data for Organization, WebSite, BreadcrumbList, and Article/Product."
+    },
+    {
+      "id": "internal_linking",
+      "index": 8,
+      "category": "technical",
+      "name": "Internal Linking & PageRank Flow",
+      "score": 60,
+      "status": "warn",
+      "metric": "0 Internal • 1 External Links",
+      "issueCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Low internal link count (0 links). Page may be an architectural dead-end."
+        }
+      ],
+      "recommendedFix": "Replace generic anchor text with descriptive topical keywords and link out to related cluster pages."
+    },
+    {
+      "id": "image_media",
+      "index": 9,
+      "category": "speed",
+      "name": "Image & Rich Media Optimization",
+      "score": 90,
+      "status": "pass",
+      "metric": "0 Images • 0 Missing Alt",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Add contextually descriptive alt text to all informational images and serve assets in WebP/AVIF format."
+    },
+    {
+      "id": "mobile_ux",
+      "index": 10,
+      "category": "onpage",
+      "name": "Mobile-First UX & Viewport Inspector",
+      "score": 100,
+      "status": "pass",
+      "metric": "Responsive Viewport Configured",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Ensure <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> is defined in <head>."
+    },
+    {
+      "id": "broken_links",
+      "index": 11,
+      "category": "technical",
+      "name": "Broken Link & Redirect Chain Radar",
+      "score": 95,
+      "status": "pass",
+      "metric": "1 total links analyzed",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Audit all link destinations and replace broken or placeholder href attributes."
+    },
+    {
+      "id": "security_headers",
+      "index": 12,
+      "category": "trust",
+      "name": "Security, SSL & Header Hygiene",
+      "score": 80,
+      "status": "pass",
+      "metric": "HTTPS Valid • No HSTS",
+      "issueCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Strict-Transport-Security (HSTS) header is missing"
+        }
+      ],
+      "recommendedFix": "Configure HSTS (Strict-Transport-Security) and enforce HTTPS site-wide via 301 redirects."
+    },
+    {
+      "id": "social_og",
+      "index": 13,
+      "category": "onpage",
+      "name": "Open Graph & Social Share Preview",
+      "score": 60,
+      "status": "warn",
+      "metric": "OG Title: Missing • OG Image: Missing",
+      "issueCount": 2,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing og:title social sharing meta tag"
+        },
+        {
+          "severity": "warning",
+          "message": "Missing og:image social preview thumbnail tag"
+        }
+      ],
+      "recommendedFix": "Add <meta property=\"og:title\"> and <meta property=\"og:image\"> for high-CTR social and messaging shares."
+    },
+    {
+      "id": "hreflang",
+      "index": 14,
+      "category": "technical",
+      "name": "International SEO & Hreflang",
+      "score": 95,
+      "status": "pass",
+      "metric": "Single language (Default)",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Maintain reciprocal hreflang links if deploying localized international content."
+    },
+    {
+      "id": "keyword_nlp",
+      "index": 15,
+      "category": "content",
+      "name": "Keyword Architecture & NLP Entities",
+      "score": 90,
+      "status": "pass",
+      "metric": "Top Entities: example (1), domainthis (1), domain (1)",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "Ensure core topic entities are naturally distributed throughout headings, lead paragraphs, and conclusion."
+    },
+    {
+      "id": "monitoring_ready",
+      "index": 16,
+      "category": "technical",
+      "name": "24/7 SEO Monitoring & Drift Detection",
+      "score": 95,
+      "status": "pass",
+      "metric": "Real-time telemetry probe active",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<!-- Automated Sentinel Health Probe -->\n<meta name=\"seo-sentinel\" content=\"interval=3600;endpoint=/api/audit/stream;slack-alert=active\">"
+    },
+    {
+      "id": "server_logs",
+      "index": 17,
+      "category": "technical",
+      "name": "Server Log File & Googlebot Crawl Tracker",
+      "score": 88,
+      "status": "pass",
+      "metric": "Server: cloudflare • TTFB: 19ms",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "# Nginx Googlebot Log Isolation\nlog_format googlebot '$remote_addr - [$time_local] \"$request\" $status $body_bytes_sent \"$http_user_agent\" $request_time';\nmap $http_user_agent $is_googlebot {\n    default 0;\n    \"~*(Googlebot|Google-InspectionTool)\" 1;\n}"
+    },
+    {
+      "id": "ecommerce_faceted",
+      "index": 18,
+      "category": "technical",
+      "name": "E-Commerce & Faceted Navigation Audit",
+      "score": 95,
+      "status": "pass",
+      "metric": "Clean URL structure",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<link rel=\"canonical\" href=\"https://example.com\">\n# robots.txt faceted filter directives:\nDisallow: /*?*sort=\nDisallow: /*?*filter="
+    },
+    {
+      "id": "local_seo",
+      "index": 19,
+      "category": "trust",
+      "name": "Local SEO & NAP Consistency",
+      "score": 80,
+      "status": "pass",
+      "metric": "Standard digital site",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"LocalBusiness\",\n  \"name\": \"Local Office\",\n  \"telephone\": \"+1-555-019-2834\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"streetAddress\": \"100 Market St\",\n    \"addressLocality\": \"San Francisco\",\n    \"addressRegion\": \"CA\",\n    \"postalCode\": \"94105\",\n    \"addressCountry\": \"US\"\n  }\n}\n</script>"
+    },
+    {
+      "id": "programmatic_scale",
+      "index": 20,
+      "category": "content",
+      "name": "Programmatic SEO & Template Quality",
+      "score": 88,
+      "status": "pass",
+      "metric": "Template structure verified",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"WebPage\",\n  \"name\": \"Localized Technical Hub\",\n  \"specialty\": \"Direct Technical Overview\",\n  \"isFamilyFriendly\": true\n}\n</script>"
+    },
+    {
+      "id": "rum_cwv",
+      "index": 21,
+      "category": "speed",
+      "name": "Real User Monitoring (RUM) Telemetry",
+      "score": 85,
+      "status": "pass",
+      "metric": "Ready for 1KB client script injection",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<!-- 1KB Lightweight RUM CWV Telemetry Script -->\n<script>\nnew PerformanceObserver((list) => {\n  for (const entry of list.getEntries()) {\n    navigator.sendBeacon(\"/api/rum\", JSON.stringify({ metric: entry.name, val: entry.startTime || entry.duration }));\n  }\n}).observe({ type: \"largest-contentful-paint\", buffered: true });\n</script>"
+    },
+    {
+      "id": "llm_readiness",
+      "index": 22,
+      "category": "onpage",
+      "name": "AI Search & LLM Citation Readiness (GEO)",
+      "score": 72,
+      "status": "warn",
+      "metric": "Citation Likelihood: 68% Moderate",
+      "issueCount": 1,
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Content lacks concise factual summary blocks for LLM extraction"
+        }
+      ],
+      "recommendedFix": "<!-- AI Overview (AEO/GEO) Direct Answer Block -->\n<section itemscope itemtype=\"https://schema.org/Answer\">\n  <h2>What is this service?</h2>\n  <div itemprop=\"text\">\n    <p>Our platform provides automated technical SEO analysis and Core Web Vitals diagnostics to capture top generative search visibility.</p>\n  </div>\n</section>"
+    },
+    {
+      "id": "backlink_radar",
+      "index": 23,
+      "category": "trust",
+      "name": "Backlink Profile & Anchor Risk Radar",
+      "score": 85,
+      "status": "pass",
+      "metric": "Domain equity analyzed",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "# Google Search Console Disavow Format\n# Disavow spam referring networks\ndomain:toxic-pbn-network.com\ndomain:spam-directory-links.net\nhttp://suspicious-forum.org/profile-spam.html"
+    },
+    {
+      "id": "migration_diff",
+      "index": 24,
+      "category": "technical",
+      "name": "Migration & Redirect Parity Inspector",
+      "score": 95,
+      "status": "pass",
+      "metric": "Redirect parity verified",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "# Nginx 301 Permanent Redirect Mapping\nlocation = /old-legacy-path {\n    return 301 https://example.com;\n}\nlocation /old-category/ {\n    return 301 /new-category/;\n}"
+    },
+    {
+      "id": "ai_fix_wizard",
+      "index": 25,
+      "category": "onpage",
+      "name": "Built-in Generative AI One-Click Fix Assistant",
+      "score": 95,
+      "status": "pass",
+      "metric": "Automated remediation ready",
+      "issueCount": 0,
+      "issues": [],
+      "recommendedFix": "<!-- Full Optimized Enterprise HTML Head Bundle -->\n<title>Example Domain</title>\n<meta name=\"description\" content=\"Optimized meta description within 150 characters for top SERP CTR.\">\n<link rel=\"canonical\" href=\"https://example.com\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    }
+  ]
+}

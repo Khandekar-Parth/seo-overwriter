@@ -1,0 +1,8 @@
+{
+  "name": "Seo Overiter",
+  "description": "Enterprise SEO Auditor & AI Overview Telemetry Platform",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "seo-overwriter",
+  "version": "1.0.0",
+  "description": "Seo Overiter - Enterprise SEO Auditor & AI Overview Telemetry Platform",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Build complete'",
+    "lint": "node --check server.js && node --check seooverwriter/server.js && node --check seooverwriter/engine/crawler.js && node --check seooverwriter/engine/modules.js && node --check seooverwriter/engine/scorer.js && node --check seooverwriter/engine/reporter.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

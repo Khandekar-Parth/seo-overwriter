@@ -31,6 +31,22 @@ async function performFullAudit(url) {
   const modules = runAllModules(crawlData);
   const scores = calculateAuditScores(modules);
 
+  const textContent = crawlData.$('body').text().replace(/\s+/g, ' ').trim();
+  const wordCount = textContent ? textContent.split(/\s+/).length : 0;
+  
+  let hostname = '';
+  try {
+    hostname = new URL(crawlData.url).hostname;
+  } catch {}
+
+  const discoveredLinks = [];
+  crawlData.$('a[href]').each((_, el) => {
+    const href = crawlData.$(el).attr('href');
+    if (href && (href.startsWith('/') || (hostname && href.includes(hostname)))) {
+      discoveredLinks.push(href);
+    }
+  });
+
   return {
     url: crawlData.url,
     timestamp: new Date().toISOString(),
@@ -44,7 +60,9 @@ async function performFullAudit(url) {
       canonical: crawlData.$('link[rel="canonical"]').attr('href') || '',
       h1Count: crawlData.$('h1').length,
       imageCount: crawlData.$('img').length,
-      linkCount: crawlData.$('a[href]').length
+      linkCount: crawlData.$('a[href]').length,
+      wordCount,
+      discoveredCount: Math.max(1, discoveredLinks.length)
     }
   };
 }
@@ -108,12 +126,39 @@ app.get('/api/audit/stream', async (req, res) => {
     });
 
     const crawlData = await crawlUrl(url);
+    const textContent = crawlData.$('body').text().replace(/\s+/g, ' ').trim();
+    const wordCount = textContent ? textContent.split(/\s+/).length : 0;
+    
+    let hostname = '';
+    try {
+      hostname = new URL(crawlData.url).hostname;
+    } catch {}
+
+    const internalLinks = [];
+    crawlData.$('a[href]').each((_, el) => {
+      const href = crawlData.$(el).attr('href');
+      if (href && (href.startsWith('/') || (hostname && href.includes(hostname)))) {
+        if (!internalLinks.includes(href)) internalLinks.push(href);
+      }
+    });
 
     sendEvent('LOG_EVENT', {
       time: new Date().toLocaleTimeString(),
       worker: '#1',
       type: '200 OK',
       message: `HTTP response received in ${crawlData.ttfb}ms (Status: ${crawlData.status})`
+    });
+
+    sendEvent('URLS_DISCOVERED', {
+      count: Math.max(1, internalLinks.length),
+      links: internalLinks.slice(0, 10)
+    });
+
+    sendEvent('LOG_EVENT', {
+      time: new Date().toLocaleTimeString(),
+      worker: '#2',
+      type: 'CRAWL',
+      message: `Discovered ${Math.max(1, internalLinks.length)} internal links for DOM architecture map`
     });
 
     sendEvent('LOG_EVENT', {
@@ -135,7 +180,8 @@ app.get('/api/audit/stream', async (req, res) => {
         progress,
         module: mod,
         completedCount: i + 1,
-        totalModules: modules.length
+        totalModules: modules.length,
+        discoveredCount: Math.max(1, internalLinks.length)
       });
 
       if (mod.status === 'crit') {
@@ -165,7 +211,12 @@ app.get('/api/audit/stream', async (req, res) => {
       pageMeta: {
         title: crawlData.$('title').text().trim(),
         description: crawlData.$('meta[name="description"]').attr('content') || '',
-        canonical: crawlData.$('link[rel="canonical"]').attr('href') || ''
+        canonical: crawlData.$('link[rel="canonical"]').attr('href') || '',
+        wordCount,
+        linkCount: crawlData.$('a[href]').length,
+        imageCount: crawlData.$('img').length,
+        h1Count: crawlData.$('h1').length,
+        discoveredCount: Math.max(1, internalLinks.length)
       }
     });
 
@@ -175,6 +226,51 @@ app.get('/api/audit/stream', async (req, res) => {
     res.end();
   }
 });
+
+// Helper: Calculate actual competitor gap
+function calculateCompetitorGap(audit1, audit2) {
+  const missing = [];
+  const m1 = Object.fromEntries(audit1.modules.map(m => [m.id, m]));
+  const m2 = Object.fromEntries(audit2.modules.map(m => [m.id, m]));
+
+  if (m2.schema_markup?.score > 70 && (!m1.schema_markup || m1.schema_markup.score <= 70)) {
+    missing.push('JSON-LD Breadcrumb & Entity Schema');
+  }
+  if ((m2.cwv_performance?.score || 0) > (m1.cwv_performance?.score || 0) + 10) {
+    missing.push('INP interaction & hero image preload tuning');
+  }
+  if ((audit2.pageMeta?.wordCount || 0) > (audit1.pageMeta?.wordCount || 0) * 1.3) {
+    missing.push('Topical Entity Depth (Competitor has significantly more content)');
+  }
+  if (m2.social_og?.score > 80 && (!m1.social_og || m1.social_og.score <= 80)) {
+    missing.push('OpenGraph & Twitter Card Social Metadata');
+  }
+  if (m2.eeat_trust?.score > 80 && (!m1.eeat_trust || m1.eeat_trust.score <= 80)) {
+    missing.push('Author E-E-A-T Authority Schema & Trust Pages');
+  }
+  if (m2.security_headers?.score > 85 && (!m1.security_headers || m1.security_headers.score <= 85)) {
+    missing.push('Strict-Transport-Security (HSTS) Header');
+  }
+  if (m2.serp_aeo?.score > 80 && (!m1.serp_aeo || m1.serp_aeo.score <= 80)) {
+    missing.push('AEO Question-Heading Direct Answer Blocks');
+  }
+  if ((audit2.pageMeta?.imageCount || 0) > (audit1.pageMeta?.imageCount || 0)) {
+    missing.push('WebP Next-Gen Media Formats');
+  }
+  if ((audit2.pageMeta?.linkCount || 0) > (audit1.pageMeta?.linkCount || 0) * 1.5) {
+    missing.push('Internal Topic Cluster Linking Architecture');
+  }
+
+  // Fallbacks if both are high scoring
+  if (missing.length === 0) {
+    missing.push('JSON-LD Breadcrumbs');
+    missing.push('Edge CDN Response Caching (TTFB < 200ms)');
+    missing.push('Server-Side Faceted Cache');
+    missing.push('Author Authority Schema');
+  }
+
+  return missing;
+}
 
 // REST Endpoint: Competitor Comparison
 app.get('/api/compare', async (req, res) => {
@@ -189,19 +285,15 @@ app.get('/api/compare', async (req, res) => {
       performFullAudit(url2)
     ]);
 
+    const missingEntities = calculateCompetitorGap(audit1, audit2);
+
     res.json({
       site1: audit1,
       site2: audit2,
       comparison: {
         scoreDiff: audit1.scores.totalScore - audit2.scores.totalScore,
         winner: audit1.scores.totalScore >= audit2.scores.totalScore ? audit1.url : audit2.url,
-        missingEntities: [
-          'JSON-LD Breadcrumbs',
-          'INP interaction tuning',
-          'Server-Side Faceted Cache',
-          'Author Authority Schema',
-          'WebP Next-Gen Media'
-        ]
+        missingEntities
       }
     });
   } catch (err) {
@@ -329,10 +421,10 @@ app.get('/api/reports', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n======================================================`);
   console.log(`  ⚡ SEO OVERITER PLATFORM RUNNING`);
-  console.log(`  🌐 Local Server: http://localhost:${PORT}`);
-  console.log(`  📊 Telemetry Stream: http://localhost:${PORT}/api/audit/stream`);
+  console.log(`  🌐 Local Server: http://0.0.0.0:${PORT}`);
+  console.log(`  📊 Telemetry Stream: http://0.0.0.0:${PORT}/api/audit/stream`);
   console.log(`======================================================\n`);
 });
